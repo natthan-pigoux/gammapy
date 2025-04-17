@@ -122,7 +122,7 @@ jobs:
         with:
           file: ./coverage.xml
           verbose: true
-          
+
   sphinx:
     name: Linux python 3.11 sphinx all-deps
     runs-on: ubuntu-latest
@@ -154,11 +154,11 @@ jobs:
           python -m pip install -e .
           gammapy download datasets
       - name: Ensure doctrees directory exists
-        run: mkdir -p docs/_build/doctrees
+        run: mkdir -p docs/_build/
       - name: Restore doctrees cache
         uses: actions/cache@v3
         with:
-          path: docs/_build/doctrees
+          path: docs/_build/
           key: ${{ runner.os }}-doctrees-${{ hashFiles('docs/**') }}
           restore-keys: |
             ${{ runner.os }}-doctrees-
@@ -173,5 +173,5 @@ jobs:
       - name: Save doctrees cache
         uses: actions/cache@v3
         with:
-          path: docs/_build/doctrees
+          path: docs/_build/
           key: ${{ runner.os }}-doctrees-${{ hashFiles('docs/**') }}
