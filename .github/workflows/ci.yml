@@ -116,9 +116,6 @@ jobs:
         env:
           GAMMAPY_DATA: ${{ github.workspace }}/gammapy-datasets/dev
         run: tox -e ${{ matrix.tox_env }} -- -n auto
-      - name: Upload coverage to codecov
-        if: "contains(matrix.tox_env, '-cov')"
-        uses: codecov/codecov-action@v5
         with:
           file: ./coverage.xml
           verbose: true
@@ -171,7 +168,7 @@ jobs:
           name: gammapy-doc-html
           path: docs/_build/html/
       - name: Save doctrees cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: docs/_build/doctrees
           key: ${{ runner.os }}-doctrees-${{ hashFiles('docs/**') }}
