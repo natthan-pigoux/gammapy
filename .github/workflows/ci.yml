@@ -116,6 +116,9 @@ jobs:
         env:
           GAMMAPY_DATA: ${{ github.workspace }}/gammapy-datasets/dev
         run: tox -e ${{ matrix.tox_env }} -- -n auto
+      - name: Upload coverage to codecov
+        if: "contains(matrix.tox_env, '-cov')"
+        uses: codecov/codecov-action@v
         with:
           file: ./coverage.xml
           verbose: true
