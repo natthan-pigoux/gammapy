@@ -152,15 +152,15 @@ jobs:
           python -m pip install tqdm requests
           python -m pip install -e .
           gammapy download datasets
-      - name: Ensure doctrees directory exists
-        run: mkdir -p docs/_build/
-      - name: Restore doctrees cache
+      - name: Ensure build directory exists
+        run: mkdir -p docs/_build/html
+      - name: Restore build cache
         uses: actions/cache@v3
         with:
-          path: docs/_build/
-          key: ${{ runner.os }}-doctrees-${{ hashFiles('docs/**') }}
+          path: docs/_build/html
+          key: ${{ runner.os }}-build-${{ hashFiles('docs/_build/html/**') }}
           restore-keys: |
-            ${{ runner.os }}-doctrees-
+            ${{ runner.os }}-build-
       - name: test build docs
         run: |
           tox -e build_docs
@@ -169,8 +169,8 @@ jobs:
         with:
           name: gammapy-doc-html
           path: docs/_build/html/
-      - name: Save doctrees cache
+      - name: Save build cache
         uses: actions/cache@v3
         with:
-          path: docs/_build/
-          key: ${{ runner.os }}-doctrees-${{ hashFiles('docs/**') }}
+          path: docs/_build/html/
+          key: ${{ runner.os }}-build-${{ hashFiles('docs/_build/html/**') }}
