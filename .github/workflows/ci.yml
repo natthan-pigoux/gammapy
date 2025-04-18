@@ -158,7 +158,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: docs/_build/html
-          key: ${{ runner.os }}-build-${{ hashFiles('docs/_build/html/**') }}
+          key: ${{ runner.os }}-build-${{ hashFiles('docs/_build/**') }}
           restore-keys: |
             ${{ runner.os }}-build-
       - name: test build docs
@@ -173,4 +173,4 @@ jobs:
         uses: actions/cache@v3
         with:
           path: docs/_build/html/
-          key: ${{ runner.os }}-build-${{ hashFiles('docs/_build/html/**') }}
+          key: ${{ runner.os }}-build-${{ hashFiles('docs/_build/**') }}
