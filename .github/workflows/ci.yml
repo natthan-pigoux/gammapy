@@ -160,13 +160,16 @@ jobs:
           gammapy download datasets
       - name: Ensure build directory exists
         run: mkdir -p docs/_build/
+      - name: Determine branch name
+        id: vars
+        run: echo "BRANCH_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}" >> $GITHUB_ENV
       - name: Restore build cache
         uses: actions/cache@v4
         with:
           path: docs/_build/
-          key: sphinx-build-${{ github.ref }}-${{ hashFiles('docs/_build/**') }}
+          key: sphinx-build-${{ env.BRANCH_NAME }}-${{ hashFiles('docs/_build/**') }}
           restore-keys: |
-            sphinx-build-${{ github.ref }}-
+            sphinx-build-${{ env.BRANCH_NAME }}-
             sphinx-build-
       - name: test build docs
         run: |
@@ -180,4 +183,4 @@ jobs:
         uses: actions/cache@v4
         with:
           path: docs/_build/
-          key: sphinx-build-${{ github.ref }}-${{ hashFiles('docs/_build/**') }}
+          key: sphinx-build-${{ env.BRANCH_NAME }}-${{ hashFiles('docs/_build/**') }}
