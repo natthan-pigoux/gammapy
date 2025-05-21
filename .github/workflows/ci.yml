@@ -122,7 +122,12 @@ jobs:
         with:
           file: ./coverage.xml
           verbose: true
-          
+
+# TODO: When using cache verify the rule on how github search the cache key
+# then think how we want to use the cache:
+# - do we want to use only the cache created on the current branch (in the MR as example)?
+# - do we want to use the default branch cache?
+
   sphinx:
     name: Linux python 3.11 sphinx all-deps
     runs-on: ubuntu-latest
@@ -148,20 +153,21 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install tox
-      - name: download datasets
+      - name: download datasets # TODO: do we want to cache this as well?
         run: |
           python -m pip install tqdm requests
           python -m pip install -e .
           gammapy download datasets
       - name: Ensure build directory exists
-        run: mkdir -p docs/_build/html
+        run: mkdir -p docs/_build/
       - name: Restore build cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
-          path: docs/_build/html
-          key: ${{ runner.os }}-build-${{ hashFiles('docs/_build/**') }}
+          path: docs/_build/
+          key: sphinx-build-${{ github.ref }}-${{ hashFiles('docs/_build/**') }}
           restore-keys: |
-            ${{ runner.os }}-build-
+            sphinx-build-${{ github.ref }}-
+            sphinx-build-
       - name: test build docs
         run: |
           tox -e build_docs
@@ -169,9 +175,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: gammapy-doc-html
-          path: docs/_build/html/
+          path: docs/_build/
       - name: Save build cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
-          path: docs/_build/html/
-          key: ${{ runner.os }}-build-${{ hashFiles('docs/_build/**') }}
+          path: docs/_build/
+          key: sphinx-build-${{ github.ref }}-${{ hashFiles('docs/_build/**') }}
