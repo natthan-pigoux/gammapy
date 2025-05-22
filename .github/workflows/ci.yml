@@ -275,10 +275,10 @@ jobs:
         id: vars
         run: echo "BRANCH_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}" >> $GITHUB_ENV
 
-      - name: Restore build cache
+      - name: Cache build
         uses: actions/cache@v4
         with:
-          path: docs/_build/
+          path: docs/_build
           key: sphinx-build-${{ env.BRANCH_NAME }}-${{ hashFiles('docs/**/*.rst', 'docs/conf.py', 'src/**/*.py') }}
           restore-keys: |
             sphinx-build-${{ env.BRANCH_NAME }}-
@@ -288,7 +288,12 @@ jobs:
         run: |
           pwd
           ls
+          echo "===="
           ls docs/_build
+          echo "===="
+          ls docs/_build/html
+          echo "===="
+          ls docs/_build/doctrees
 
       - name: test build docs
         run: |
@@ -298,13 +303,18 @@ jobs:
         run: |
           pwd
           ls
+          echo "===="
           ls docs/_build
-          
-      - name: Save build cache
-        uses: actions/cache@v4
-        with:
-          path: docs/_build/
-          key: sphinx-build-${{ env.BRANCH_NAME }}-${{ hashFiles('docs/**/*.rst', 'docs/conf.py', 'src/**/*.py') }}
+          echo "===="
+          ls docs/_build/html
+          echo "===="
+          ls docs/_build/doctrees
+
+      # - name: Save build cache
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: docs/_build/
+      #     key: sphinx-build-${{ env.BRANCH_NAME }}-${{ hashFiles('docs/**/*.rst', 'docs/conf.py', 'src/**/*.py') }}
 
       # - name: check links
       #   continue-on-error: true
