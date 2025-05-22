@@ -278,7 +278,10 @@ jobs:
       - name: Cache build
         uses: actions/cache@v4
         with:
-          path: docs/_build
+          path: 
+            docs/_build/html
+            docs/_build/doctrees
+            docs/_build/plot_directive
           key: sphinx-build-${{ env.BRANCH_NAME }}-${{ hashFiles('docs/**/*.rst', 'docs/conf.py', 'src/**/*.py') }}
           restore-keys: |
             sphinx-build-${{ env.BRANCH_NAME }}-
