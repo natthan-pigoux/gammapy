@@ -285,6 +285,7 @@ jobs:
             sphinx-build-
 
       - name: check cache
+        continue-on-error: true
         run: |
           pwd
           ls
