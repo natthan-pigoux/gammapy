@@ -194,9 +194,9 @@ jobs:
       #   continue-on-error: true
       #   run: |
       #     tox -e linkcheck -- -j auto
-      
-      # - name: Upload HTML output
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: gammapy-doc-html
-      #     path: docs/_build/
+
+      - name: Upload HTML output
+        uses: actions/upload-artifact@v4
+        with:
+          name: gammapy-doc-html
+          path: docs/_build/
