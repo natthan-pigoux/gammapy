@@ -190,10 +190,11 @@ jobs:
           path: docs/_build/
           key: sphinx-build-${{ env.BRANCH_NAME }}-${{ hashFiles('docs/**/*.rst', 'docs/conf.py', 'src/**/*.py') }}
 
-      - name: check links
-        continue-on-error: true
-        run: |
-          tox -e linkcheck -- -j auto
+      # - name: check links
+      #   continue-on-error: true
+      #   run: |
+      #     tox -e linkcheck -- -j auto
+      
       # - name: Upload HTML output
       #   uses: actions/upload-artifact@v4
       #   with:
