@@ -295,6 +295,8 @@ jobs:
           ls docs/_build/html
           echo "===="
           ls docs/_build/doctrees
+          echo "===="
+          ls -la docs/_build/html/_static/webpack-macros.html
 
       - name: test build docs
         run: |
@@ -310,6 +312,9 @@ jobs:
           ls docs/_build/html
           echo "===="
           ls docs/_build/doctrees
+          echo "===="
+          ls -l docs/_build/doctrees/environment.pickle
+          md5sum docs/_build/doctrees/environment.pickle
 
       - name: Save build cache
         uses: actions/cache@v4
