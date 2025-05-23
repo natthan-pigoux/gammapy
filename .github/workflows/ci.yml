@@ -275,7 +275,7 @@ jobs:
         id: vars
         run: echo "BRANCH_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}" >> $GITHUB_ENV
 
-      - name: Cache build
+      - name: Restore cache build
         uses: actions/cache@v4
         with:
           path: 
@@ -314,11 +314,11 @@ jobs:
           echo "===="
           ls docs/_build/doctrees
 
-      # - name: Save build cache
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: docs/_build/
-      #     key: sphinx-build-${{ env.BRANCH_NAME }}-${{ hashFiles('docs/**/*.rst', 'docs/conf.py', 'src/**/*.py') }}
+      - name: Save build cache
+        uses: actions/cache@v4
+        with:
+          path: docs/_build/
+          key: sphinx-build-${{ env.BRANCH_NAME }}-${{ hashFiles('docs/**/*.rst', 'docs/conf.py', 'src/**/*.py') }}
 
       # - name: check links
       #   continue-on-error: true
