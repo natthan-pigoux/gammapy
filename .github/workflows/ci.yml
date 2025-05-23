@@ -278,10 +278,7 @@ jobs:
       - name: Restore cache build
         uses: actions/cache@v4
         with:
-          path: |
-            docs/_build/html
-            docs/_build/doctrees
-            docs/_build/plot_directive
+          path: docs/_build/
           key: sphinx-build-${{ env.BRANCH_NAME }}-${{ hashFiles('docs/**/*.rst', 'docs/conf.py', 'src/**/*.py') }}
           restore-keys: |
             sphinx-build-${{ env.BRANCH_NAME }}-
@@ -317,10 +314,7 @@ jobs:
       - name: Save build cache
         uses: actions/cache@v4
         with:
-          path: |
-            docs/_build/html
-            docs/_build/doctrees
-            docs/_build/plot_directive
+          path: docs/_build/
           key: sphinx-build-${{ env.BRANCH_NAME }}-${{ hashFiles('docs/**/*.rst', 'docs/conf.py', 'src/**/*.py') }}
 
       # - name: check links
