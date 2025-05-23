@@ -288,7 +288,6 @@ jobs:
         continue-on-error: true
         run: |
           pwd
-          ls
           echo "===="
           ls docs/_build
           echo "===="
@@ -300,6 +299,8 @@ jobs:
           echo "===="
           ls -l docs/_build/doctrees/environment.pickle
           md5sum docs/_build/doctrees/environment.pickle
+          echo "===="
+          cat ./docs/_build/html/.buildinfo
 
       - name: test build docs
         run: |
@@ -308,16 +309,19 @@ jobs:
       - name: check cache afterward
         run: |
           pwd
-          ls
           echo "===="
-          ls docs/_build
+          ls -l docs/_build
           echo "===="
           ls docs/_build/html
           echo "===="
           ls docs/_build/doctrees
           echo "===="
+          ls -la docs/_build/html/_static/webpack-macros.html
+          echo "===="
           ls -l docs/_build/doctrees/environment.pickle
           md5sum docs/_build/doctrees/environment.pickle
+          echo "===="
+          cat ./docs/_build/html/.buildinfo
 
       - name: Save build cache
         uses: actions/cache@v4
