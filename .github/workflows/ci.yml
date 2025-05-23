@@ -297,6 +297,9 @@ jobs:
           ls docs/_build/doctrees
           echo "===="
           ls -la docs/_build/html/_static/webpack-macros.html
+          echo "===="
+          ls -l docs/_build/doctrees/environment.pickle
+          md5sum docs/_build/doctrees/environment.pickle
 
       - name: test build docs
         run: |
