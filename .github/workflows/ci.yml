@@ -296,8 +296,11 @@ jobs:
           ls docs/_build/doctrees
           echo "===="
           ls -la docs/_build/html/_static/webpack-macros.html
+          stat docs/_build/html/_static/webpack-macros.html
+          md5sum docs/_build/html/_static/webpack-macros.html
           echo "===="
           ls -l docs/_build/doctrees/environment.pickle
+          stat docs/_build/doctrees/environment.pickle
           md5sum docs/_build/doctrees/environment.pickle
           echo "===="
           cat ./docs/_build/html/.buildinfo
@@ -317,8 +320,11 @@ jobs:
           ls docs/_build/doctrees
           echo "===="
           ls -la docs/_build/html/_static/webpack-macros.html
+          stat docs/_build/html/_static/webpack-macros.html
+          md5sum docs/_build/html/_static/webpack-macros.html
           echo "===="
           ls -l docs/_build/doctrees/environment.pickle
+          stat docs/_build/doctrees/environment.pickle
           md5sum docs/_build/doctrees/environment.pickle
           echo "===="
           cat ./docs/_build/html/.buildinfo
