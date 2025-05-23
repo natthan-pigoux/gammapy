@@ -227,10 +227,10 @@ jobs:
   #         verbose: true
 >>>>>>> 482d7f7f7 (check docs/_build path)
 
-# TODO: When using cache verify the rule on how github search the cache key
-# then think how we want to use the cache:
-# - do we want to use only the cache created on the current branch (in the MR as example)?
-# - do we want to use the default branch cache?
+# Potentially 3 things:
+# 1. Generating tutorials are long
+# 2. the sphinx see webpack-macros.html as modified 
+# 3. the sphinx see environmet.pickle  as modified
 
 # NOTE: related issue https://github.com/sphinx-doc/sphinx/issues/11556
 
