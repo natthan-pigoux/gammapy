@@ -153,9 +153,27 @@ jobs:
           python -m pip install tqdm requests
           python -m pip install -e .
           gammapy download datasets
+      - name: Ensure build directory exists
+        run: mkdir -p docs/_build/
+      - name: Determine branch name
+        id: vars
+        run: echo "BRANCH_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}" >> $GITHUB_ENV
+      - name: Restore cache build
+        uses: actions/cache@v4
+        with:
+          path: docs/_build/
+          key: sphinx-build-${{ env.BRANCH_NAME }}-${{ hashFiles('docs/**/*.rst', 'docs/conf.py', 'src/**/*.py') }}
+          restore-keys: |
+            sphinx-build-${{ env.BRANCH_NAME }}-
+            sphinx-build-
       - name: test build docs
         run: |
           tox -e build_docs
+      - name: Save build cache
+        uses: actions/cache@v4
+        with:
+          path: docs/_build/
+          key: sphinx-build-${{ env.BRANCH_NAME }}-${{ hashFiles('docs/**/*.rst', 'docs/conf.py', 'src/**/*.py') }}
       - name: Upload HTML output
         uses: actions/upload-artifact@v4
         with:
